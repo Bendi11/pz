@@ -1,17 +1,17 @@
 require 'Map.SGlobalObject'
 
----@class CMillGlobalObject: SGlobalObject
+---@class SMillGlobalObject: SGlobalObject
 ---@field workDimensions { width: number, height: number }
 ---@field loadedStock 
-local CMillGlobalObject = SGlobalObject:derive('CMillGlobalObject')
+local SMillGlobalObject = SGlobalObject:derive('SMillGlobalObject')
 
----@return CMillGlobalObject
-function CMillGlobalObject:new(luaSystem, gObject)
+---@return SMillGlobalObject
+function SMillGlobalObject:new(luaSystem, gObject)
     return SGlobalObject.new(self, luaSystem, gObject)
 end
 
 ---comment
 ---@param modData { [string]: any }
-function CMillGlobalObject:fromModData(modData)
+function SMillGlobalObject:fromModData(modData)
     self.workDimensions = modData['workDimensions']
 end

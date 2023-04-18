@@ -2,7 +2,6 @@
 ---@class Point
 ---@field x number
 ---@field y number
-
 local Point = {}
 
 ---Create a new point from x and y coordinates
@@ -11,8 +10,8 @@ local Point = {}
 ---@return Point
 function Point:new(x, y)
     local o = {}
-    self.__index = self
     setmetatable(o, self)
+    self.__index = self
 
     o.x = x
     o.y = y
