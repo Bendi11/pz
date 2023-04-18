@@ -1,0 +1,14 @@
+module pam {
+    imports {
+        Base,
+    }
+
+    item AluminumSheetStock {
+        Weight = 3,
+        Type = Normal,
+        UseWhileEquipped = FALSE,
+        DisplayName = Aluminum Stock (Sheet),
+        Icon = AluminumSheetStock,
+        MetalValue = 1,
+    }
+}
