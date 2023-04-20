@@ -1,7 +1,5 @@
 local geom = require 'lib/geom'
 
-local json = require 'lib.json'
-
 ---@alias LinesIterator fun(): Line|nil
 ---@class Point: { [1]: number, [2]: number }
 ---@alias Line { [1]: Point, [2]: Point }

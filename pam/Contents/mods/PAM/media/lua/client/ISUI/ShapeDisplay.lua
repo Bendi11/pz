@@ -1,6 +1,5 @@
 require 'ISUI/ISUIElement'
 
-local Shape = require 'lib/geom/Shape'
 local geom = require 'lib/geom'
 
 ---@class ShapeDisplay: ISUIElement
@@ -44,3 +43,5 @@ function ShapeDisplay:render()
 
     ISUIElement.render(self)
 end
+
+return ShapeDisplay

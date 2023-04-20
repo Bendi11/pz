@@ -1,7 +1,10 @@
-require 'ISUI.ISPanelJoypad'
+require 'ISUI/ISPanelJoypad'
+
+local ShapeDisplay = require 'ISUI/ShapeDisplay'
+local Shape = require 'lib/geom/Shape'
 
 ---@class PAMDebugSheetPanel: ISPanelJoypad
----@field dbgText ISTextBox
+---@field shapeDisplay ShapeDisplay
 local PAMDebugSheetPanel = ISPanelJoypad:derive('PAMDebugSheetPanel')
 
 ---Name to use when referencing in an ISTabPanel
@@ -14,8 +17,9 @@ function PAMDebugSheetPanel:new(x, y, width, height)
 end
 
 function PAMDebugSheetPanel:createChildren()
-    
-    self.dbgText = ISTextBox:new(0, 0, self:getWidth(), self:getHeight(), 'Debug text')
+    self.shapeDisplay = ShapeDisplay:new(0, 0, self.width, self.height, Shape.new_rect(10, 5))
+    self.shapeDisplay:initialise()
+    self:addChild(self.shapeDisplay)
 end
 
 return PAMDebugSheetPanel
