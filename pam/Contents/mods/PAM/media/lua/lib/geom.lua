@@ -15,7 +15,7 @@ end
 ---@param point Point
 ---@return boolean
 function geom.point_on_line(line, point)
-    local dist = (geom.distance(point, line[1]) + geom.distance(point, line[2]))
+    local dist = geom.distance(point, line[1]) + geom.distance(point, line[2])
     return dist == geom.distance(line[1], line[2])
 end
 

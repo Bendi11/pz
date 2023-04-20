@@ -6,7 +6,7 @@ local json = require 'lib.json'
 ---@alias Point { [1]: number, [2]: number }
 ---@alias Line { [1]: Point, [2]: Point }
 
----@class Shape: Point[]
+---@alias Shape Point[]
 local Shape = {}
 
 ---@param list Point[] with length >= 3
@@ -50,6 +50,16 @@ function Shape:lines()
     return function()
         i = i + 1
         if i <= #self then return {self[i], self[self:next_point(i)]} end
+    end
+end
+
+---Get an iterator over the points in this shape
+---@return fun(): Point|nil
+function Shape:points()
+    local i = 0
+    return function()
+        i = i + 1
+        if i <= #self then return self[i] end
     end
 end
 
@@ -100,7 +110,13 @@ function Shape:divide(cut)
 
     if not first_divider or not second_divider then return self, nil end
 
-    local function divided(first, next)
+    print(
+        'intersects @ '
+        .. json.encode(cut[1]) .. ' x ' .. json.encode(first_divider) .. '\n'
+        .. ' and ' .. json.encode(cut[#cut]) .. ' x ' .. json.encode(second_divider)
+    )
+
+     local function divided(first, next)
         local idx = self:point_idx(first_divider[first])
         local i = idx
         local point
@@ -108,10 +124,12 @@ function Shape:divide(cut)
         local part = {}
         while true do
             point = self[i]
-            if (second_divider ~= first_divider and point == second_divider[1]) or point == second_divider[2] then
+            print('Traversing to ' .. json.encode(point))
+
+            insert(part, point)
+            if point == second_divider[3 - first] then
                 break
             end
-            insert(part, point)
 
             i = next(self, i)
             if i == idx then return self, nil end
@@ -121,8 +139,19 @@ function Shape:divide(cut)
             insert(part, cut[j])
         end
 
-        return part
+        return Shape:new(part)
 
+    end
+
+
+
+    if first_divider == second_divider then
+        local original = divided(1, self.prev_point)
+
+        local part = {}
+        for p in cut:points() do insert(part, {p[1], p[2]}) end
+
+        return original, Shape:new(part)
     end
 
     return divided(1, self.prev_point), divided(2, self.next_point)
@@ -132,11 +161,11 @@ local square = Shape.new_square(1)
 local cut = Shape:new {
     {-0.5, 0},
     {0, 0},
-    {0, 0.25},
-    {-0.5, 0.25}
+    {0, 0.5},
 }
 local p1, p2 = square:divide(cut)
 
 print(json.encode(p1) .. '\n\n' .. json.encode(p2))
+print(p1:area() .. ' and ' .. p2:area())
 
 return Shape
