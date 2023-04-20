@@ -14,6 +14,7 @@ function PAMDebugSheetPanel:new(x, y, width, height)
 end
 
 function PAMDebugSheetPanel:createChildren()
+    
     self.dbgText = ISTextBox:new(0, 0, self:getWidth(), self:getHeight(), 'Debug text')
 end
 

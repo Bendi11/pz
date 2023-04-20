@@ -3,10 +3,10 @@ local geom = require 'lib/geom'
 local json = require 'lib.json'
 
 ---@alias LinesIterator fun(): Line|nil
----@alias Point { [1]: number, [2]: number }
+---@class Point: { [1]: number, [2]: number }
 ---@alias Line { [1]: Point, [2]: Point }
 
----@alias Shape Point[]
+---@class Shape: Point[]
 local Shape = {}
 
 ---@param list Point[] with length >= 3
@@ -30,6 +30,24 @@ function Shape.new_square(len)
         {-len, len },
         {len,  len },
         {len,  -len},
+    }
+
+    return Shape:new(points)
+end
+
+---Create a new rectangle Shape from a width and height
+---@param width number
+---@param height number
+---@return Shape
+function Shape.new_rect(width, height)
+    width = width / 2
+    height = height / 2
+
+    local points = {
+        {-width, -height},
+        {width, -height},
+        {width, height},
+        {-width, height}
     }
 
     return Shape:new(points)
@@ -110,13 +128,7 @@ function Shape:divide(cut)
 
     if not first_divider or not second_divider then return self, nil end
 
-    print(
-        'intersects @ '
-        .. json.encode(cut[1]) .. ' x ' .. json.encode(first_divider) .. '\n'
-        .. ' and ' .. json.encode(cut[#cut]) .. ' x ' .. json.encode(second_divider)
-    )
-
-     local function divided(first, next)
+    local function divided(first, next)
         local idx = self:point_idx(first_divider[first])
         local i = idx
         local point
@@ -124,7 +136,6 @@ function Shape:divide(cut)
         local part = {}
         while true do
             point = self[i]
-            print('Traversing to ' .. json.encode(point))
 
             insert(part, point)
             if point == second_divider[3 - first] then
@@ -156,16 +167,5 @@ function Shape:divide(cut)
 
     return divided(1, self.prev_point), divided(2, self.next_point)
 end
-
-local square = Shape.new_square(1)
-local cut = Shape:new {
-    {-0.5, 0},
-    {0, 0},
-    {0, 0.5},
-}
-local p1, p2 = square:divide(cut)
-
-print(json.encode(p1) .. '\n\n' .. json.encode(p2))
-print(p1:area() .. ' and ' .. p2:area())
 
 return Shape
