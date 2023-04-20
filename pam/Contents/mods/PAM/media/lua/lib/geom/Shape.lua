@@ -5,6 +5,7 @@ local json = require 'lib.json'
 ---@alias LinesIterator fun(): Line|nil
 ---@class Point: { [1]: number, [2]: number }
 ---@alias Line { [1]: Point, [2]: Point }
+---@alias AABB { [1]: Point, [2]: Point }
 
 ---@class Shape: Point[]
 local Shape = {}
@@ -166,6 +167,24 @@ function Shape:divide(cut)
     end
 
     return divided(1, self.prev_point), divided(2, self.next_point)
+end
+
+---Get an axis-aligned bounding box for this shape
+---@return AABB
+function Shape:aabb()
+    local min_pt = {self[1][1], self[1][2]}
+    local max_pt = {self[1][1], self[1][2]}
+    
+    local min, max = math.min, math.max
+    for point in self:points() do
+        min_pt[1] = min(min_pt[1], point[1])
+        min_pt[2] = min(min_pt[2], point[2])
+
+        max_pt[1] = max(max_pt[2], point[1])
+        max_pt[2] = max(max_pt[2], point[2])
+    end
+
+    return { min_pt, max_pt }
 end
 
 return Shape
