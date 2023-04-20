@@ -153,8 +153,6 @@ function Shape:divide(cut)
 
     end
 
-
-
     if first_divider == second_divider then
         local original = divided(1, self.prev_point)
 

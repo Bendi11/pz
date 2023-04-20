@@ -5,7 +5,7 @@ local PAMDebugSheetPanel = require 'ISUI/PAMDebugSheetPanel'
 ---@class PAMDebugWindow: ISCollapsableWindow
 ---@field mainpanel ISTabPanel
 ---@field debugSheets PAMDebugSheetPanel
-PAMDebugWindow = ISCollapsableWindow:derive("PAMMillControlWindow")
+PAMDebugWindow = ISCollapsableWindow:derive("PAMDebugWindow")
 
 ---Name of the window used for registering window in ISLayoutManager
 local WINDOW_NAME = 'pam-dbg'

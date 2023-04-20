@@ -18,3 +18,5 @@ function PAMSheetStock:new(width, height)
 
     return o
 end
+
+return PAMSheetStock
