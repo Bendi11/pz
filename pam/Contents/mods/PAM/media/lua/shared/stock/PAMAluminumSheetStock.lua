@@ -1,6 +1,5 @@
-require 'ISBaseObject'
+--[[require 'ISBaseObject'
 
-local json = require 'lib.json'
 local geom = require 'lib.geom'
 
 ---@class PAMAluminumSheetStock: ISBaseObject
@@ -17,12 +16,4 @@ function PAMAluminumSheetStock:new()
     o.geometry = geom.Shape.new_square(1)
 
     return o
-end
-
-local shape = geom.Shape.new_square(5)
-
-for p1, p2 in shape:lines() do
-    print(json.encode(p1) .. ' -> ' .. json.encode(p2))
-end
-
-print(shape:area())
+end]]

@@ -1,4 +1,4 @@
-require 'Map.SGlobalObject'
+--[[require 'Map.SGlobalObject'
 
 ---@class SMillGlobalObject: SGlobalObject
 ---@field workDimensions { width: number, height: number }
@@ -14,4 +14,4 @@ end
 ---@param modData { [string]: any }
 function SMillGlobalObject:fromModData(modData)
     self.workDimensions = modData['workDimensions']
-end
+end]]

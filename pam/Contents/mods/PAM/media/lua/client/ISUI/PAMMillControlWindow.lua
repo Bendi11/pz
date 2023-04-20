@@ -1,4 +1,4 @@
-require 'ISUI.ISCollapsableWindow'
+require 'ISUI/ISCollapsableWindow'
 
 ---@class PAMMillControlWindow: ISCollapsableWindow
 local PAMMillControlWindow = ISCollapsableWindow:derive("PAMMillControlWindow")
