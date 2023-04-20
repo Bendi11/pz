@@ -1,6 +1,7 @@
 require 'ISUI/ISCollapsableWindow'
 
 local PAMDebugSheetPanel = require 'ISUI/PAMDebugSheetPanel'
+local StockViewWindow = require 'ISUI/StockViewWindow'
 
 ---@class PAMDebugWindow: ISCollapsableWindow
 ---@field mainpanel ISTabPanel
@@ -65,7 +66,13 @@ function PAMDebugWindow:close()
     self:removeFromUIManager()
 end
 
+---@param items InventoryItem[]
 function PAMDebugWindow.onFillInventoryObjectContextMenu(player, ctx, items)
+    for i=1,#items do
+        if items[i]:getName() == 'AluminumSheetStock' then
+            ctx:addOption('View Stock', nil, function() StockViewWindow.open(items[i]) end)
+        end
+    end
     ctx:addOption('Show Debug Menu', nil, function() PAMDebugWindow.getInstance():addToUIManager() end)
 end
 

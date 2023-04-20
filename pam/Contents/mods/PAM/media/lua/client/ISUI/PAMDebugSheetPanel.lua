@@ -17,7 +17,8 @@ function PAMDebugSheetPanel:new(x, y, width, height)
 end
 
 function PAMDebugSheetPanel:createChildren()
-    self.shapeDisplay = ShapeDisplay:new(0, 0, self.width, self.height, Shape.new_rect(10, 5))
+    self.shapeDisplay = ShapeDisplay:new(0, 0, self.width, self.height)
+    self.shapeDisplay:setShape(Shape.new_rect(5, 2.5))
     self.shapeDisplay:initialise()
     self:addChild(self.shapeDisplay)
 end

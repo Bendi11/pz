@@ -3,44 +3,8 @@ module pam {
         Base,
     }
 
-    item AluminumSheetStock1 {
-        Weight = 0.356,
-        Type = Normal,
-        UseWhileEquipped = FALSE,
-        DisplayName = Aluminum Stock (Sheet),
-        Icon = AluminumSheetStock,
-        MetalValue = 1,
-    }
-
-    item AluminumSheetStock2 {
-        Weight = 0.712,
-        Type = Normal,
-        UseWhileEquipped = FALSE,
-        DisplayName = Aluminum Stock (Sheet),
-        Icon = AluminumSheetStock,
-        MetalValue = 1,
-    }
-
-    item AluminumSheetStock4 {
-        Weight = 1.424,
-        Type = Normal,
-        UseWhileEquipped = FALSE,
-        DisplayName = Aluminum Stock (Sheet),
-        Icon = AluminumSheetStock,
-        MetalValue = 1,
-    }
-
-    item AluminumSheetStock6 {
-        Weight = 2.136,
-        Type = Normal,
-        UseWhileEquipped = FALSE,
-        DisplayName = Aluminum Stock (Sheet),
-        Icon = AluminumSheetStock,
-        MetalValue = 1,
-    }
-
-    item AluminumSheetStock10 {
-        Weight = 3.56,
+    item AluminumSheetStock {
+        Weight = 0,
         Type = Normal,
         UseWhileEquipped = FALSE,
         DisplayName = Aluminum Stock (Sheet),

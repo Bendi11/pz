@@ -12,33 +12,31 @@ local ShapeDisplay = ISUIElement:derive('ShapeDisplay')
 ---@param y integer
 ---@param width integer
 ---@param height integer
----@param shape Shape
----@param aabb AABB|nil
 ---@return ShapeDisplay
-function ShapeDisplay:new(x, y, width, height, shape, aabb)
-    local o = ISUIElement.new(self, x, y, width, height)
+function ShapeDisplay:new(x, y, width, height)
+    return ISUIElement.new(self, x, y, width, height)
+end
 
-    o.shape = shape
-
+---Set the currently viewed shape, and bounding box that serves to scale the shape to fit the window size
+---@param shape Shape|nil
+---@param aabb AABB|nil
+function ShapeDisplay:setShape(shape, aabb)
+    aabb = aabb or (shape and shape:aabb()) or nil
     local size = math.sqrt(self.width^2 + self.height^2)
-
-    aabb = aabb or shape:aabb()
-
-    o.pxPerIn = size / geom.distance(aabb[1], aabb[2])
-
-
-    return o
+    o.pxPerIn = (aabb and size / geom.distance(aabb[1], aabb[2])) or nil
 end
 
 function ShapeDisplay:render()
-    local w = self.width / 2
-    local h = self.height / 2
-    for line in self.shape:lines() do
-        self:drawLine2(
-            line[1][1] * self.pxPerIn + w, line[1][2] * self.pxPerIn + h,
-            line[2][1] * self.pxPerIn + w, line[2][2] * self.pxPerIn + h,
-            1, 1, 1, 1
-        )
+    if self.shape then
+        local w = self.width / 2
+        local h = self.height / 2
+        for line in self.shape:lines() do
+            self:drawLine2(
+                line[1][1] * self.pxPerIn + w, line[1][2] * self.pxPerIn + h,
+                line[2][1] * self.pxPerIn + w, line[2][2] * self.pxPerIn + h,
+                1, 1, 1, 1
+            )
+        end
     end
 
     ISUIElement.render(self)
